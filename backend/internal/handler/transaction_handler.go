@@ -35,6 +35,11 @@ func (h *TransactionHandler) Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if header.Header.Get("Content-Type") != "text/csv" {
+		helper.ResponseError(w, http.StatusBadRequest, "invalid file type, expected csv")
+		return
+	}
+
 	transactions, err := h.svc.ProcessCSV(file)
 	if err != nil {
 		helper.ResponseError(w, http.StatusBadRequest, err.Error())
