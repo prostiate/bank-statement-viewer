@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/prostiate/bank-statement-viewer/internal/helper"
+	"github.com/prostiate/bank-statement-viewer/internal/model"
 	"github.com/prostiate/bank-statement-viewer/internal/service"
 )
 
@@ -74,6 +75,10 @@ func (h *TransactionHandler) GetIssues(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		helper.ResponseError(w, http.StatusInternalServerError, err.Error())
 		return
+	}
+
+	if issues == nil {
+		issues = []model.Transaction{}
 	}
 
 	helper.ResponseSuccess(w, http.StatusOK, map[string]interface{}{"issues": issues})
