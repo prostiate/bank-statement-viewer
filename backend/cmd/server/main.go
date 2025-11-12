@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/prostiate/bank-statement-viewer/internal/handler"
+	"github.com/prostiate/bank-statement-viewer/internal/middleware"
 	"github.com/prostiate/bank-statement-viewer/internal/repository"
 	"github.com/prostiate/bank-statement-viewer/internal/service"
 )
@@ -21,5 +22,5 @@ func main() {
 	mux.HandleFunc("GET /issues", h.GetIssues)
 
 	log.Println("Server starting on :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":8080", middleware.CorsMiddleware(mux)))
 }
