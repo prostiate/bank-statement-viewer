@@ -31,6 +31,11 @@ function CsvUploader() {
       return;
     }
 
+    if (selectedFile.type !== "text/csv") {
+      setUploadStatus("Please select a CSV file.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", selectedFile);
 
