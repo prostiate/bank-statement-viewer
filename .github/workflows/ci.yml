@@ -34,10 +34,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v2 // [!code ++]
-        with:
-          bun-version: 1.2.23
+        uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: bun install // [!code ++]
+        run: bun install
       - name: Run ESLint
-        run: bun run lint // [!code ++]
+        run: bun run lint
